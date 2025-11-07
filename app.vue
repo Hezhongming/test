@@ -3,8 +3,9 @@ import ms from 'ms'
 
 const { data: info } = await useFetch('/api/info')
 
-const generatedAt = useState(() => new Date().toISOString())
-const date = new Date(generatedAt.value)
+const generated = new Date().toLocaleString()
+const generatedAt = new Date().toISOString()
+const date = new Date(generatedAt)
 const timeAgo = ref()
 onMounted(() => {
   timeAgo.value = ms(Date.now() - date.valueOf(), { long: true })
@@ -13,33 +14,10 @@ onMounted(() => {
 
 <template>
   <div id="container">
-    <Head>
-      <Title>Nuxt on Vercel</Title>
-      <Meta
-        name="description"
-        content="HTML, dynamically rendered in a city near you"
-      />
-      <Meta name="twitter:card" content="summary_large_image" />
-      <Meta name="twitter:site" content="@nuxt_js" />
-      <Meta name="twitter:creator" content="@nuxt_js" />
-      <Meta name="twitter:title" content="Nuxt on the edge" />
-      <Meta
-        name="twitter:description"
-        content="HTML, dynamically rendered in a city near you"
-      />
-      <Meta
-        name="twitter:image"
-        content="https://nuxt-on-the-edge.vercel.app/og-card.png"
-      />
-      <Meta name="twitter:image:alt" content="The Vercel and Nuxt logos" />
-      <Meta
-        name="og:image"
-        content="https://nuxt-on-the-edge.vercel.app/og-card.png"
-      />
-    </Head>
+  
     <div style="height: 100%">
-      <AppBackground />
-      <main>
+      <!-- <AppBackground /> -->
+
         <h1>Hello from Vercel!</h1>
         <div class="info">
           <div class="block">
@@ -53,7 +31,16 @@ onMounted(() => {
 
           <div class="block">
             <div class="contents">
-              <span>Generated</span>
+              <span>缓存时间：</span>
+              <span>
+                <strong>{{ generated }} </strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="contents">
+              <span>生成间隔：</span>
               <span>
                 <strong v-if="timeAgo">{{ timeAgo }} ago</strong>
                 <strong v-else>...</strong>
@@ -61,30 +48,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
-      </main>
-      <div class="debug">Regenerated at {{ generatedAt }}</div>
     </div>
-    <footer>
-      <p class="company">
-        <a target="_blank" href="https://vercel.com" aria-label="Vercel">
-          <LogoVercel />
-        </a>
-      </p>
-      <p class="details">
-        Built with
-        <NuxtLink to="https://nuxt.com" target="_blank">Nuxt</NuxtLink>
-        on
-        <NuxtLink to="https://vercel.com" target="_blank">Vercel</NuxtLink>
-      </p>
-      <NuxtLink
-        target="_blank"
-        href="https://github.com/danielroe/nuxt-vercel-isr"
-        class="source"
-      >
-        <LogoGithub />
-        Source
-      </NuxtLink>
-    </footer>
   </div>
 </template>
 
