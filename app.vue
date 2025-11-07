@@ -3,9 +3,8 @@ import ms from 'ms'
 
 const { data: info } = await useFetch('/api/info')
 
-const generated = new Date().toLocaleString()
-const generatedAt = new Date().toISOString()
-const date = new Date(generatedAt)
+const generatedAt = useState(() => new Date())
+const date = new Date(generatedAt.value)
 const timeAgo = ref()
 onMounted(() => {
   timeAgo.value = ms(Date.now() - date.valueOf(), { long: true })
@@ -14,7 +13,7 @@ onMounted(() => {
 
 <template>
   <div id="container">
-  
+   
     <div style="height: 100%">
       <!-- <AppBackground /> -->
 
@@ -33,7 +32,7 @@ onMounted(() => {
             <div class="contents">
               <span>缓存时间：</span>
               <span>
-                <strong>{{ generated }} </strong>
+                <strong>{{ generatedAt }} </strong>
               </span>
             </div>
           </div>
