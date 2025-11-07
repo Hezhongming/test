@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   routeRules: {
-    '/**': { isr: 1800 },
+    '/**': { isr: 60 },
   },
   runtimeConfig: {
     nitro: { envPrefix: 'VERCEL_' },
